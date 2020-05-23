@@ -24,8 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm build 
+    - run: npm install --save gulp-install
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
