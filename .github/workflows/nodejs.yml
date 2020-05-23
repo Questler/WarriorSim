@@ -26,26 +26,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - name: GitHub Pages
-      uses: crazy-max/ghaction-github-pages@v2.0.0
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        # GitHub repository where assets will be deployed (default current)
-        #repo: # optional
-        # Git branch where assets will be deployed
-        #target_branch: master # optional, default is gh-pages
-        # Create incremental commit instead of doing push force
-        keep_history: true # optional, default is false
-        # Allow an empty commit to be created
-        allow_empty_commit: false # optional, default is true
-        # Build directory to deploy
-        build_dir: .*
-        # The committer name and email address
-        #committer: # optional
-        # The author name and email address
-        #author: # optional
-        # Commit message
-        #commit_message: # optional
-        # Write the given domain name to the CNAME file
-        #fqdn: # optional
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
     env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
