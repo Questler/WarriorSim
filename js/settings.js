@@ -33,8 +33,7 @@ SIM.SETTINGS = {
             $('section.settings').removeClass('active');
         });
 
-        view.exportImport.on('click', '.btn .js-export', function (e) {
-            e.stopPropagation();
+        view.exportImport.find('.js-import').click(function (e) {
             e.preventDefault();
             var a = document.createElement("a");
             a.href = URL.createObjectURL(new Blob([JSON.stringify(localStorage)], {type: "application/json"}));
@@ -44,30 +43,29 @@ SIM.SETTINGS = {
             document.body.removeChild(a);
         });
 
-        view.exportImport.on('click', '.btn .js-import', function (e) {
-            e.stopPropagation();
+        view.exportImport.find('.js-import').click(function (e) {
             e.preventDefault();
         });
-
-        view.exportImport.on('dragover', '.btn .js-import', function (e) {
+        
+        view.exportImport.find('.js-import').on('dragover', function (e) {
             e.stopPropagation();
             e.preventDefault();
             // Style the drag-and-drop as a "copy file" operation.
-            e.dataTransfer.dropEffect = 'copy';
+            e.originalEvent.dataTransfer.dropEffect = 'copy';
         });
-
-        view.exportImport.on('drop', '.btn .js-import', function (e) {
+        
+        view.exportImport.find('.js-import').on('drop', function (e) {
             e.stopPropagation();
             e.preventDefault();
-            let fileList = e.dataTransfer.files;
+            let fileList = e.originalEvent.dataTransfer.files;
             var reader = new FileReader();
             reader.addEventListener('load', (event) => {
-                Object.keys(JSON.parse(event.target.result)).forEach(function(key) {
+                var data = JSON.parse(event.target.result)
+                Object.keys(data).forEach(function(key) {
                     localStorage[key] = data[key];
                 });
             });
             reader.readAsText(fileList[0]);
-            location.reload();
         });
 
         view.buffs.on('click', '.icon', function () {
