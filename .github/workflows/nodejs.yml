@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
         # Git branch where assets will be deployed
         target_branch: master # optional, default is gh-pages
         # Create incremental commit instead of doing push force
-        keep_history: true # optional, default is false
+        keep_history: false # optional, default is false
         # Allow an empty commit to be created
         allow_empty_commit: false # optional, default is true
         # Build directory to deploy
