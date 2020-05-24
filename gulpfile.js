@@ -32,6 +32,7 @@ gulp.task('browser', function() {
         server: {
             baseDir: "./"
         }
-    });
+    })
+});
 
 gulp.task('default', ['sass', 'js', 'watch']);
