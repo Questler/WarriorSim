@@ -25,9 +25,14 @@ gulp.task('sass', function(){
       .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('watch', function(){
-    gulp.watch('scss/*.scss', ['sass']);
-    gulp.watch('js/**/*.js', ['js']);
-});
+gulp.task('browser', function() {	
+    browser.init({	
+        server: {	
+            baseDir: "./"	
+        },	
+        // Stop the browser from automatically opening	
+        open: false	
+    });	
+});	
 
-gulp.task('default', ['sass', 'js', 'watch']);
+gulp.task('default', ['sass', 'js', 'watch', 'browser']);
