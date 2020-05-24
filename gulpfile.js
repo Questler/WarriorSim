@@ -4,6 +4,9 @@ var sass = require('gulp-sass');
 var minify = require('gulp-minify');
 var browser = require('browser-sync').create();
 
+gulp.on('stop', () => { process.exit(0); });
+gulp.on('err', () => { process.exit(1); });
+
 gulp.task('js', function() {
     gulp.src(['js/**/*.js', 'lib/*.mjs'])
       .pipe(minify({
@@ -27,12 +30,14 @@ gulp.task('watch', function(){
     gulp.watch('js/**/*.js', ['js']);
 });
 
-gulp.task('browser', function() {
-    browser.init({
-        server: {
-            baseDir: "./"
-        }
-    });
-});
+gulp.task('browser', function() {	
+    browser.init({	
+        server: {	
+            baseDir: "./"	
+        },	
+        // Stop the browser from automatically opening	
+        open: false	
+    });	
+});	
 
 gulp.task('default', ['sass', 'js', 'watch', 'browser']);
