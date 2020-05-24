@@ -27,12 +27,4 @@ gulp.task('watch', function(){
     gulp.watch('js/**/*.js', ['js']);
 });
 
-gulp.task('browser', function() {
-    browser.init({
-        server: {
-            baseDir: "./"
-        }
-    })
-});
-
 gulp.task('default', ['sass', 'js', 'watch']);
