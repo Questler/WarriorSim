@@ -64,6 +64,7 @@ SIM.SETTINGS = {
                 Object.keys(data).forEach(function(key) {
                     localStorage[key] = data[key];
                 });
+                location.reload();
             });
             reader.readAsText(fileList[0]);
         });
