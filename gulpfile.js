@@ -25,6 +25,11 @@ gulp.task('sass', function(){
       .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('watch', function(){	gulp.task('browser', function() {	
+    gulp.watch('scss/*.scss', ['sass']);	    browser.init({	
+    gulp.watch('js/**/*.js', ['js']);	        server: {	
+});
+
 gulp.task('browser', function() {	
     browser.init({	
         server: {	
