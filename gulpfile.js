@@ -30,4 +30,14 @@ gulp.task('watch', function(){
     gulp.watch('js/**/*.js', ['js']);
 });
 
-gulp.task('default', ['sass', 'js', 'watch']);
+gulp.task('browser', function() {	
+    browser.init({	
+        server: {	
+            baseDir: "./"	
+        },	
+        // Stop the browser from automatically opening	
+        open: false	
+    });	
+});	
+
+gulp.task('default', ['sass', 'js', 'watch', 'browser']);
