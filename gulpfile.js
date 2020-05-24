@@ -30,7 +30,9 @@ gulp.task('watch', function(){
 gulp.task('browser', function() {
     browser.init({
         server: {
-            baseDir: "./"
+            baseDir: "./",
+            // Stop the browser from automatically opening
+            open: false
         }
     });
 });
