@@ -33,7 +33,7 @@ SIM.SETTINGS = {
             $('section.settings').removeClass('active');
         });
 
-        view.exportImport.find('.js-import').click(function (e) {
+        view.exportImport.find('.js-export').click(function (e) {
             e.preventDefault();
             var a = document.createElement("a");
             a.href = URL.createObjectURL(new Blob([JSON.stringify(localStorage)], {type: "application/json"}));
