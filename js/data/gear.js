@@ -327,6 +327,49 @@ var gear = {
          "source": "Quest",
          "phase": 1,
          "id": 17044
+      },
+      {
+         "name": "Strength of Mugamba (Friendly)",
+         "str": 7,
+         "sta": 10,
+         "source": "ZG",
+         "phase": 4,
+         "id": 19574
+      },
+      {
+         "name": "Strength of Mugamba (Honored)",
+         "str": 7,
+         "sta": 10,
+         "agi": 6,
+         "source": "ZG",
+         "phase": 4,
+         "id": 19575
+      },
+      {
+         "name": "Strength of Mugamba (Revered)",
+         "str": 8,
+         "sta": 13,
+         "agi": 8,
+         "source": "ZG",
+         "phase": 4,
+         "id": 19576
+      },
+      {
+         "name": "Rage of Mugamba",
+         "str": 8,
+         "sta": 13,
+         "agi": 8,
+         "source": "ZG",
+         "phase": 4,
+         "id": 19577
+      },
+      {
+         "name": "Emberfury Talisman",
+         "crit": 1,
+         "sta": 8,
+         "source": "Dungeon",
+         "phase": 1,
+         "id": 12929
       }
    ],
    "shoulder": [
@@ -381,6 +424,16 @@ var gear = {
          "source": "ZG",
          "phase": 4,
          "id": 19878
+      },
+      {
+         "name": "Chitinous Shoulderguards",
+         "str": 11,
+         "sta": 7,
+         "agi": 25,
+         "ac": 151,
+         "source": "AQ20",
+         "phase": 5,
+         "id": 21474
       },
       {
          "name": "Conqueror's Spaulders",
@@ -535,6 +588,15 @@ var gear = {
          "source": "AQ40",
          "phase": 5,
          "id": 21665
+      },
+      {
+         "name": "Darksoul Shoulders",
+         "hit": 1,
+         "sta": 24,
+         "ac": 507,
+         "source": "Crafting",
+         "phase": 4,
+         "id": 19695
       }
    ],
    "back": [
@@ -743,6 +805,15 @@ var gear = {
          "source": "Other",
          "phase": 4,
          "id": 20691
+      },
+      {
+         "name": "Might of the Tribe",
+         "sta": 18,
+         "ap": 28,
+         "ac": 48,
+         "source": "ZG",
+         "phase": 4,
+         "id": 22712
       }
    ],
    "chest": [
@@ -991,6 +1062,15 @@ var gear = {
          "source": "AQ40",
          "phase": 5,
          "id": 21680
+      },
+      {
+         "name": "Darksoul Breastplate",
+         "hit": 1,
+         "sta": 32,
+         "ac": 736,
+         "source": "Crafting",
+         "phase": 4,
+         "id": 19693
       }
    ],
    "wrist": [
@@ -1843,6 +1923,15 @@ var gear = {
          "source": "Crafting",
          "phase": 5,
          "id": 22385
+      },
+      {
+         "name": "Darksoul Leggings",
+         "hit": 2,
+         "sta": 22,
+         "ac": 722,
+         "source": "Crafting",
+         "phase": 4,
+         "id": 19694
       }
    ],
    "feet": [
@@ -2899,7 +2988,7 @@ var gear = {
          "str": 5,
          "sta": 5,
          "agi": 7,
-         "source": "AQ40",
+         "source": "AQ20",
          "phase": "5",
          "id": 21459
       },
@@ -3046,7 +3135,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19852,
-         "magicdmg": 56
+         "magicdmg": 56,
+         "coeff": 1
       },
       {
          "name": "Annihilator",
@@ -3840,7 +3930,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19908,
-         "magicdmg": 78
+         "magicdmg": 78,
+         "coeff": 1
       },
       {
          "name": "Spineshatter",
@@ -4184,7 +4275,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19901,
-         "magicdmg": 84
+         "magicdmg": 84,
+         "coeff": 1,
       },
       {
          "name": "Teebu's Blazing Longsword",
@@ -4337,7 +4429,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19852,
-         "magicdmg": 56
+         "magicdmg": 56,
+         "coeff": 1,
       },
       {
          "name": "Blessed Qiraji War Axe",
@@ -4990,7 +5083,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19908,
-         "magicdmg": 78
+         "magicdmg": 78,
+         "coeff": 1
       },
       {
          "name": "Stormstrike Hammer",
@@ -5241,7 +5335,8 @@ var gear = {
          "ppm": 1,
          "phase": 4,
          "id": 19901,
-         "magicdmg": 84
+         "magicdmg": 84,
+         "coeff": 1
       },
       {
          "name": "The Hungering Cold",

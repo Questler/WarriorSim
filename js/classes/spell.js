@@ -254,6 +254,7 @@ class Hamstring extends Spell {
         this.cost = 10;
         this.threshold = parseInt(spells[18].minrage);
         this.maxdelay = parseInt(spells[18].reaction);
+        if (player.items.includes(19577)) this.cost -= 2;
     }
     dmg() {
         return 45;
@@ -297,6 +298,7 @@ class Aura {
     end() {
         this.uptime += (step - this.starttimer);
         this.timer = 0;
+        this.stacks = 0;
     }
 }
 
@@ -306,6 +308,7 @@ class Recklessness extends Aura {
         this.duration = 15;
         this.stats = { crit: 100 };
         this.maxdelay = parseInt(spells[7].reaction);
+        this.timetoend = parseInt(spells[7].timetoend) * 1000;
     }
     use() {
         if (this.timer) this.uptime += (step - this.starttimer);
@@ -316,7 +319,7 @@ class Recklessness extends Aura {
         //if (log) this.player.log(`${this.name} applied`);
     }
     canUse() {
-        return this.firstuse && !this.timer && !this.player.timer;
+        return this.firstuse && !this.timer && !this.player.timer && step >= this.usestep;
     }
 }
 
@@ -443,7 +446,7 @@ class DeathWish extends Aura {
         this.mult_stats = { dmgmod: 20 };
         this.name = 'Death Wish';
         this.crusaders = parseInt(spells[6].crusaders);
-        this.deathwishstep = parseInt(spells[6].time) * 1000;
+        this.timetoend = parseInt(spells[6].timetoend) * 1000;
         this.maxdelay = parseInt(spells[6].reaction);
     }
     use() {
@@ -456,7 +459,7 @@ class DeathWish extends Aura {
         //if (log) this.player.log(`${this.name} applied`);
     }
     canUse() {
-        return this.firstuse && !this.timer && !this.player.timer && this.player.rage >= 10 && (step > this.deathwishstep ||
+        return this.firstuse && !this.timer && !this.player.timer && this.player.rage >= 10 && (step >= this.usestep ||
             (this.crusaders == 1 && ((this.player.auras.crusader1 && this.player.auras.crusader1.timer) || (this.player.auras.crusader2 && this.player.auras.crusader2.timer))) ||
             (this.crusaders == 2 && this.player.auras.crusader1 && this.player.auras.crusader1.timer && this.player.auras.crusader2 && this.player.auras.crusader2.timer));
     }
@@ -496,7 +499,7 @@ class MightyRagePotion extends Aura {
         this.stats = { str: 60 };
         this.duration = 20;
         this.crusaders = parseInt(spells[13].crusaders);
-        this.ragestep = parseInt(spells[13].time) * 1000;
+        this.timetoend = parseInt(spells[13].timetoend) * 1000;
         this.maxdelay = parseInt(spells[13].reaction);
         this.name = 'Mighty Rage Potion';
     }
@@ -509,7 +512,7 @@ class MightyRagePotion extends Aura {
         //if (log) this.player.log(`${this.name} applied`);
     }
     canUse() {
-        return this.firstuse && !this.timer && (step > this.ragestep ||
+        return this.firstuse && !this.timer && (step >= this.usestep ||
             (this.crusaders == 1 && ((this.player.auras.crusader1 && this.player.auras.crusader1.timer) || (this.player.auras.crusader2 && this.player.auras.crusader2.timer))) ||
             (this.crusaders == 2 && this.player.auras.crusader1 && this.player.auras.crusader1.timer && this.player.auras.crusader2 && this.player.auras.crusader2.timer));
     }
@@ -531,6 +534,7 @@ class BloodFury extends Aura {
         this.mult_stats = { apmod: 25 };
         this.name = 'Blood Fury';
         this.maxdelay = parseInt(spells[11].reaction);
+        this.timetoend = parseInt(spells[11].timetoend) * 1000;
     }
     use() {
         if (this.timer) this.uptime += (step - this.starttimer);
@@ -550,7 +554,7 @@ class BloodFury extends Aura {
         }
     }
     canUse() {
-        return this.firstuse && !this.timer && !this.player.timer;
+        return this.firstuse && !this.timer && !this.player.timer && step >= this.usestep;
     }
 }
 
@@ -560,6 +564,7 @@ class Berserking extends Aura {
         this.duration = 10;
         this.mult_stats = { haste: parseInt(spells[10].haste) };
         this.maxdelay = parseInt(spells[10].reaction);
+        this.timetoend = parseInt(spells[10].timetoend) * 1000;
     }
     use() {
         if (this.timer) this.uptime += (step - this.starttimer);
@@ -580,7 +585,7 @@ class Berserking extends Aura {
         }
     }
     canUse() {
-        return this.firstuse && !this.timer && !this.player.timer && this.player.rage >= 5;
+        return this.firstuse && !this.timer && !this.player.timer && this.player.rage >= 5 && step >= this.usestep;
     }
 }
 
@@ -803,17 +808,16 @@ class Swarmguard extends Aura {
         this.armor = 200;
         this.stacks = 0;
         this.chance = 5000;
+        this.timetoend = 30000;
     }
     use() {
-        this.player.timer = 1500;
-        this.player.itemtimer = this.duration * 1000;
         this.timer = step + this.duration * 1000;
         this.starttimer = step;
         this.stacks = 0;
         //if (log) this.player.log(`${this.name} applied`);
     }
     canUse() {
-        return this.firstuse && !this.timer && !this.player.timer && !this.player.itemtimer;
+        return this.firstuse && !this.timer && step >= this.usestep;
     }
     proc() {
         this.stacks = Math.min(this.stacks + 1, 6);

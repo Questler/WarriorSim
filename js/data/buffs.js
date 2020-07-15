@@ -244,11 +244,33 @@ var buffs = [
       hit: 2
    },
    {
+      id: 23327,
+      name: "Fire-toasted Bun",
+      iconname: "inv_misc_food_11",
+      group: "",
+      hit: 2
+   },
+   {
       id: 23513,
       spellid: true,
       name: "Essence of the Red",
       iconname: "spell_fire_lavaspawn",
       group: "vaelbuff",
    },
+   {
+      id: 12217,
+      name: "Dragonbreath Chili",
+      iconname: "inv_drink_17",
+      group: "dragonbreath",
+   },
+   {
+      id: 29338,
+      spellid: true,
+      name: "Fire Festival Fury",
+      iconname: "inv_misc_summerfest_brazierorange",
+      crit: 3,
+      spellcrit: 3,
+   },
+   
    
 ];

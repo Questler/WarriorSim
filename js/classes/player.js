@@ -11,6 +11,7 @@ class Player {
         this.nextswingcl = false;
         this.aqbooks = $('select[name="aqbooks"]').val() == "Yes";
         this.weaponrng = $('select[name="weaponrng"]').val() == "Yes";
+        this.spelldamage = parseInt($('input[name="spelldamage"]').val());
         if (enchtype == 1) {
             this.testEnch = testItem;
             this.testEnchType = testType;
@@ -263,6 +264,8 @@ class Player {
                     this.zerkstance = true;
                 if (buff.group == "vaelbuff")
                     this.vaelbuff = true;
+                if (buff.group == "dragonbreath")
+                    this.dragonbreath = true;
 
                 this.base.ap += (buff.ap || 0) + apbonus;
                 this.base.agi += buff.agi || 0;
@@ -345,13 +348,11 @@ class Player {
 
         if (this.stats.apmod != 1)
             this.stats.ap += ~~((this.base.aprace + this.stats.str * 2) * (this.stats.apmod - 1));
-        if (this.stats.haste > 2) 
-            this.stats.haste = 2;
     }
     updateStrength() {
         this.stats.str = this.base.str;
         this.stats.ap = this.base.ap;
-            
+        
         for (let name in this.auras) {
             if (this.auras[name].timer) {
                 if (this.auras[name].stats.str)
@@ -391,7 +392,6 @@ class Player {
             this.stats.haste *= (1 + this.auras.pummeler.mult_stats.haste / 100);
         if (this.auras.spider && this.auras.spider.timer)
             this.stats.haste *= (1 + this.auras.spider.mult_stats.haste / 100);
-        if (this.stats.haste > 2) this.stats.haste = 2;
     }
     updateBonusDmg() {
         let bonus = 0;
@@ -560,6 +560,8 @@ class Player {
         if (this.trinketproc1 && this.trinketproc1.spell && this.trinketproc1.spell.timer) this.trinketproc1.spell.end();
         if (this.trinketproc2 && this.trinketproc2.spell && this.trinketproc2.spell.timer) this.trinketproc2.spell.end();
         if (this.attackproc && this.attackproc.spell && this.attackproc.spell.timer) this.attackproc.spell.end();
+
+        if (this.auras.flurry && this.auras.flurry.timer) this.auras.flurry.end();
 
     }
     rollweapon(weapon) {
@@ -770,6 +772,9 @@ class Player {
             if (this.auras.zandalarian && this.auras.zandalarian.timer) {
                 this.auras.zandalarian.proc();
             }
+            if (this.dragonbreath && rng10k() < 400) {
+                procdmg += this.magicproc({ magicdmg: 60, coeff: 1 });
+            }
         }
         if (!spell || spell instanceof HeroicStrike || spell instanceof HeroicStrikeExecute) {
             if (this.auras.flurry && this.auras.flurry.stacks)
@@ -782,11 +787,13 @@ class Player {
     magicproc(proc) {
         let mod = 1;
         let miss = 1700;
+        let dmg = proc.magicdmg;
         if (proc.binaryspell) miss = this.target.binaryresist;
         else mod *= this.target.mitigation;
         if (rng10k() < miss) return 0;
         if (rng10k() < (this.stats.spellcrit * 100)) mod *= 1.5;
-        return ~~(proc.magicdmg * mod);
+        if (proc.coeff) dmg += this.spelldamage * proc.coeff;
+        return ~~(dmg * mod);
     }
     physproc(dmg) {
         let tmp = 0;
