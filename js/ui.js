@@ -467,6 +467,7 @@ SIM.UI = {
         localStorage.adjacentlevel = view.fight.find('input[name="adjacentlevel"]').val();
         localStorage.aqbooks = view.fight.find('select[name="aqbooks"]').val();
         localStorage.weaponrng = view.fight.find('select[name="weaponrng"]').val();
+        localStorage.spelldamage = view.fight.find('input[name="spelldamage"]').val();
 
         let _buffs = [], _rotation = [], _talents = [], _sources = [], _phases = [], _gear = {}, _enchant = {};
         view.buffs.find('.active').each(function () { _buffs.push($(this).attr('data-id')); });
@@ -893,20 +894,12 @@ SIM.UI = {
     },
 
     newVersion: function() {
-        
+        var view = this;
+
         localStorage.version = version;
 
-        for (let type in gear) {
-            for (let item of gear[type]) {
-                item.dps = undefined;
-            }
-        }
-        for (let type in enchant) {
-            for (let item of enchant[type]) {
-                item.dps = undefined;
-            }
-        }
-
+        if (!view.filter.find(`.phases [data-id="4"]`).hasClass('active'))
+            setTimeout(() => { view.filter.find(`.phases [data-id="4"]`).click() }, 100);
 
     }
     
