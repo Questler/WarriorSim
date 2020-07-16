@@ -14,7 +14,6 @@ SIM.SETTINGS = {
     variables: function () {
         var view = this;
         view.body = $('body');
-        view.exportImport = view.body.find('article.exportImport');
         view.buffs = view.body.find('article.buffs');
         view.fight = view.body.find('article.fight');
         view.rotation = view.body.find('article.rotation');
@@ -31,41 +30,6 @@ SIM.SETTINGS = {
             e.preventDefault();
             $('.js-settings').removeClass('active');
             $('section.settings').removeClass('active');
-        });
-
-        view.exportImport.find('.js-import').click(function (e) {
-            e.preventDefault();
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(new Blob([JSON.stringify(localStorage)], {type: "application/json"}));
-            a.setAttribute("download", "export.json");
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        });
-
-        view.exportImport.find('.js-import').click(function (e) {
-            e.preventDefault();
-        });
-        
-        view.exportImport.find('.js-import').on('dragover', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            // Style the drag-and-drop as a "copy file" operation.
-            e.originalEvent.dataTransfer.dropEffect = 'copy';
-        });
-        
-        view.exportImport.find('.js-import').on('drop', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            let fileList = e.originalEvent.dataTransfer.files;
-            var reader = new FileReader();
-            reader.addEventListener('load', (event) => {
-                var data = JSON.parse(event.target.result)
-                Object.keys(data).forEach(function(key) {
-                    localStorage[key] = data[key];
-                });
-            });
-            reader.readAsText(fileList[0]);
         });
 
         view.buffs.on('click', '.icon', function () {
@@ -328,7 +292,4 @@ SIM.SETTINGS = {
             if (talent.x == x && talent.y == y)
                 return talent;
     }
-
-
-
 };
