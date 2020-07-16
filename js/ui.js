@@ -29,7 +29,6 @@ SIM.UI = {
         view.tcontainer = view.main.find('.table-container');
         view.alerts = view.body.find('.alerts');
         view.progress = view.main.find('progress');
-        view.exportImport = view.body.find('article.exportImport');
     },
 
     events: function () {
