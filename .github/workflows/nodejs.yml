@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,13 +24,28 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    #- run: npm install --save gulp-cli gulp-sass gulp-cssnano gulp-sass gulp-minify gulp-browser
     - run: npm ci
-    - run: gulp
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+    - run: npm run build --if-present
+    - name: GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v2.0.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
+        # GitHub repository where assets will be deployed (default current)
+        #repo: # optional
+        # Git branch where assets will be deployed
+        target_branch: master # optional, default is gh-pages
+        # Create incremental commit instead of doing push force
+        keep_history: false # optional, default is false
+        # Allow an empty commit to be created
+        allow_empty_commit: false # optional, default is true
+        # Build directory to deploy
+        build_dir: ./
+        # The committer name and email address
+        #committer: # optional
+        # The author name and email address
+        #author: # optional
+        # Commit message
+        #commit_message: # optional
+        # Write the given domain name to the CNAME file
+        #fqdn: # optional
     env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
