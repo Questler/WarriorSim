@@ -51,7 +51,7 @@ SIM.UI = {
             view.simulateDPS();
         });
 
-        view.sidebar.find('.js-import').click(function (e) {
+        view.sidebar.find('.js-export').click(function (e) {
             e.preventDefault();
             var a = document.createElement("a");
             a.href = URL.createObjectURL(new Blob([JSON.stringify(localStorage)], {type: "application/json"}));
